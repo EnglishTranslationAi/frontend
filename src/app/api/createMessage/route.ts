@@ -8,7 +8,7 @@ export async function POST(
     const messages = requestData.messages
 
     console.log('RRE',messages)
-    const apiKey = process.env.OPENAI_API_KEY
+    const apiKey = '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'
     const url = 'https://api.openai.com/v1/chat/completions'
     console.log('SOME')
 
