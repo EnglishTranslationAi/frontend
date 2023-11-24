@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=18.17.0"
+  },
   "dependencies": {
+
     "@tanstack/react-query": "^5.8.6",
     "axios": "^1.6.2",
     "formik": "^2.4.5",
