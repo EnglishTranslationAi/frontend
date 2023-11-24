@@ -4,10 +4,7 @@ import MessagesList from "@/components/MessageList/MessageList";
 
 const ChatLayout = () => {
     return (
-        <MessagesProvider>
-            <>sd</>
-
-        </MessagesProvider>
+       <></>
     );
 };
 
