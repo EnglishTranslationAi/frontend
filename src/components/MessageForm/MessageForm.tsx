@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import {FormEvent, useState} from 'react';
 import { useMessages } from "@/utils/useMessage";
 import styles from "./messageForm.module.scss";
 
@@ -7,7 +7,7 @@ const MessageForm = () => {
     const [content, setContent] = useState('');
     const { addMessage } = useMessages();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         addMessage(content);
         setContent('');

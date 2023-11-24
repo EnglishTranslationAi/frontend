@@ -1,4 +1,3 @@
-'use client'
 import { useMessages } from "@/utils/useMessage";
 import { extractUserText } from "@/helpers/extractUserText";
 import Image from "next/image";
@@ -10,17 +9,30 @@ import ReactMarkdown from "react-markdown";
 const MessagesList = () => {
     const { messages, isLoadingAnswer } = useMessages();
 
+    // @ts-ignore
+    const renderContent = (content) => {
+        if (typeof content === 'string') {
+            return content;
+        } else if (Array.isArray(content)) {
+            // Assuming each part of the array has a 'text' property
+            return content.map(part => part.text).join(' ');
+        }
+        return '';
+    };
+
     return (
         <div className={styles.messageContainer}>
             {messages?.map((message, i) => {
                 const isUser = message.role === 'user';
-                if (message.role === 'system') return null;
+                if (message.role === 'system' || !message.content) return null;
+
+                const formattedContent = renderContent(message.content);
 
                 return (
                     <div
                         id={`message-${i}`}
                         className={`${styles.message} ${isUser ? styles.user : styles.system} ${i === 1 ? styles.maxWidthMd : ''}`}
-                        key={message.content}
+                        key={i} // Using index as key; consider using a unique identifier if available
                     >
                         {!isUser && (
                             <Image
@@ -33,15 +45,12 @@ const MessagesList = () => {
                         )}
                         <div className={`${styles.messageContent} ${isUser ? styles.user : styles.system}`}>
                             {isUser
-                                ?
-                                extractUserText(message.content.trim())
-                                :
-                                <ReactMarkdown
+                                ? extractUserText(formattedContent)
+                                : <ReactMarkdown
                                     remarkPlugins={[gfm]}
                                 >
-                                    {message.content.trim()}
+                                    {formattedContent}
                                 </ReactMarkdown>
-
                             }
                         </div>
                         {isUser && (
