@@ -1,0 +1,44 @@
+.messageFormContainer {
+  position: relative;
+  max-width: 768px; // equivalent to max-w-3xl
+  margin: auto;
+  border-top-left-radius: 1rem; // equivalent to rounded-t-xl
+  border-top-right-radius: 1rem; // equivalent to rounded-t-xl
+}
+
+.formContent {
+  height: 130px;
+  background: white;
+  border-top: 1px solid #e2e8f0; // equivalent to border-t border-gray-200
+  border-left: 1px solid #e2e8f0; // equivalent to border-l border-gray-200
+  border-right: 1px solid #e2e8f0; // equivalent to border-r border-gray-200
+  padding: 1rem; // equivalent to p-5
+  border-top-left-radius: 1rem; // equivalent to rounded-t-xl
+  border-top-right-radius: 1rem; // equivalent to rounded-t-xl
+  backdrop-filter: blur(20px);
+}
+
+.textarea {
+  width: 100%;
+  border: none;
+  padding: 0.75rem; // equivalent to p-3
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  border-radius: 0;
+  resize: none;
+}
+
+.submitButton {
+  position: absolute;
+  right: 2rem; // equivalent to right-8
+  bottom: 2.5rem; // equivalent to bottom-10
+}
+
+.sendIcon {
+  margin-left: 0.25rem; // equivalent to ml-1
+  height: 1rem; // equivalent to h-4
+  width: 1rem; // equivalent to w-4
+}
+
+// Add more custom styles as needed

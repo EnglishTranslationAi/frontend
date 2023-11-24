@@ -1,0 +1,89 @@
+.messageContainer {
+  max-width: 768px; // equivalent to Tailwind's max-w-3xl
+  padding-top: 2rem; // equivalent to Tailwind's pt-8
+  margin: auto;
+}
+
+.message {
+  margin-bottom: 1rem; // equivalent to Tailwind's mb-4
+  display: flex;
+  align-items: center;
+
+  &.user {
+    justify-content: flex-end;
+  }
+
+  &.system {
+
+    justify-content: flex-start;
+  }
+
+  &.maxWidthMd {
+    max-width: 28rem; // equivalent to Tailwind's max-w-md
+  }
+}
+
+.avatar {
+  height: 2.25rem; // 36px
+  width: 2.25rem; // 36px
+  border-radius: 9999px; // full circle
+}
+
+.messageContent {
+  max-width: calc(100% - 45px);
+  padding: 0.5rem 0.75rem; // equivalent to Tailwind's px-3 py-2
+  border-radius: 0.5rem; // equivalent to Tailwind's rounded-lg
+  position: relative;
+
+  &.user {
+    background: linear-gradient(to bottom right, #667eea, #764ba2); // example gradient
+    color: white;
+    margin-right: 0.5rem; // equivalent to Tailwind's mr-2
+  }
+
+  &.system {
+    padding: 30px;
+    background: #f7fafc; // equivalent to Tailwind's bg-gray-200
+    color: #2d3748; // equivalent to Tailwind's text-gray-700
+    margin-left: 0.5rem; // equivalent to Tailwind's ml-2
+  }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 1rem; // equivalent to Tailwind's p-2.5 px-4
+  border-radius: 9999px; // full circle
+  background: #f7fafc; // equivalent to Tailwind's bg-gray-200
+  margin-left: 0.5rem; // equivalent to Tailwind's ml-2
+
+  span {
+    display: block;
+    height: 0.75rem; // equivalent to Tailwind's h-3
+    width: 0.75rem; // equivalent to Tailwind's w-3
+    border-radius: 9999px; // full circle
+    background-color: #007bff; // example color, like sea water
+    animation: wave 1.5s infinite ease-in-out;
+  }
+
+  span:nth-child(2) {
+    animation-delay: -1.2s;
+  }
+
+  span:nth-child(3) {
+    animation-delay: -0.6s;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+// Add more custom styles as needed
