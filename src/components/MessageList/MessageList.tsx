@@ -1,3 +1,4 @@
+'use client'
 import { useMessages } from "@/utils/useMessage";
 import { extractUserText } from "@/helpers/extractUserText";
 import Image from "next/image";

@@ -20,7 +20,7 @@ interface ContextProps {
 const ChatsContext = createContext<ContextProps>({} as ContextProps);
 
 export function MessagesProvider({children}: { children: ReactNode }) {
-    console.log('QQ2')
+
     const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([])
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(false)
     useEffect(() => {
