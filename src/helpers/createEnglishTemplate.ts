@@ -1,7 +1,7 @@
 import {englishTaskCondition, englishTaskTemplate} from "@/baseEnglishTemplate";
 
-// @ts-ignore
-export const createEnglishTemplate = (content) => {
+
+export const createEnglishTemplate = (content:any) => {
 return `
 ${englishTaskCondition}
 ${englishTaskTemplate}

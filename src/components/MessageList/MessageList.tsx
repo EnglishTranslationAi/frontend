@@ -10,8 +10,8 @@ import ReactMarkdown from "react-markdown";
 const MessagesList = () => {
     const { messages, isLoadingAnswer } = useMessages();
 
-    // @ts-ignore
-    const renderContent = (content) => {
+
+    const renderContent = (content:any) => {
         if (typeof content === 'string') {
             return content;
         } else if (Array.isArray(content)) {
