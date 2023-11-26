@@ -6,6 +6,5 @@ return `
 ${englishTaskCondition}
 ${englishTaskTemplate}
 '''${content}'''
-
 `
 }
