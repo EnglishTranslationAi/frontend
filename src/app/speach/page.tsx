@@ -1,13 +1,12 @@
 'use client'
 import "regenerator-runtime"
 // @ts-ignore
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
 import {useEffect, useState} from "react";
 
 const IndexPage = () => {
-    const [message, setMessage] = useState('');
-    // @ts-ignore
-    // @ts-ignore
+    const [speechRecognitionSupported, setSpeechRecognitionSupported] =
+        useState(null) // null or boolean
     const commands = [
         {
             command: 'reset',
@@ -22,54 +21,43 @@ const IndexPage = () => {
             callback: () => setMessage('Hi there!')
         },
     ]
+
     // @ts-ignore
     const {
         transcript,
-        interimTranscript,
-        finalTranscript,
-        resetTranscript,
         listening,
-    } = useSpeechRecognition({ commands });
+        resetTranscript,
+        browserSupportsSpeechRecognition
+    } = useSpeechRecognition({commands})
 
     useEffect(() => {
-        if (finalTranscript !== '') {
-            console.log('Got final result:', finalTranscript);
-        }
-    }, [interimTranscript, finalTranscript]);
-    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-        return null;
+        // sets to true or false after component has been mounted
+        setSpeechRecognitionSupported(browserSupportsSpeechRecognition)
+    }, [browserSupportsSpeechRecognition])
+
+    if (speechRecognitionSupported === null) return null // return null on first render, can be a loading indicator
+
+    if (!speechRecognitionSupported) {
+        return <span>Browser does not support speech recognition.</span>
     }
 
-    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-        console.log('Your browser does not support speech recognition software! Try Chrome desktop, maybe?');
-    }
     const listenContinuously = () => {
         SpeechRecognition.startListening({
             continuous: true,
             language: 'uk-UA',
         });
     };
+
     return (
         <div>
-            <div>
-       <span>
-         listening:
-           {' '}
-           {listening ? 'on' : 'off'}
-       </span>
-                <div>
-                    <button type="button" onClick={resetTranscript}>Reset</button>
-                    <button type="button" onClick={listenContinuously}>Listen</button>
-                    <button type="button" onClick={SpeechRecognition.stopListening}>Stop</button>
-                </div>
-            </div>
-            <div>
-                {message}
-            </div>
-            <div>
-                <span>{transcript}</span>
-            </div>
+            <p>Microphone: {listening ? 'on' : 'off'}</p>
+            <button onClick={listenContinuously}>Start</button>
+            <button onClick={SpeechRecognition.stopListening}>Stop</button>
+            <button onClick={resetTranscript}>Reset</button>
+            <p>{transcript}</p>
         </div>
-    );
-};
+    )
+}
 export default IndexPage
+
+
