@@ -1,44 +1,31 @@
 'use client'
-import "regenerator-runtime"
-// @ts-ignore
-import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
-import {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 
-const IndexPage = () => {
-    const [speechRecognitionSupported, setSpeechRecognitionSupported] =
-        useState(null) // null or boolean
-    const commands = [
-        {
-            command: 'reset',
-            callback: () => resetTranscript()
-        },
-        {
-            command: 'shut up',
-            callback: () => setMessage('I wasn\'t talking.')
-        },
-        {
-            command: 'Hello',
-            callback: () => setMessage('Hi there!')
-        },
-    ]
+import "regenerator-runtime";
 
-    // @ts-ignore
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+
+
+const Speech: React.FC = () => {
+    const [speechRecognitionSupported, setSpeechRecognitionSupported] = useState<boolean | null>(null);
+
     const {
         transcript,
         listening,
         resetTranscript,
-        browserSupportsSpeechRecognition
-    } = useSpeechRecognition({commands})
+        browserSupportsSpeechRecognition,
+    } = useSpeechRecognition();
 
     useEffect(() => {
-        // sets to true or false after component has been mounted
-        setSpeechRecognitionSupported(browserSupportsSpeechRecognition)
-    }, [browserSupportsSpeechRecognition])
+        setSpeechRecognitionSupported(browserSupportsSpeechRecognition);
+    }, [browserSupportsSpeechRecognition]);
 
-    if (speechRecognitionSupported === null) return null // return null on first render, can be a loading indicator
+    if (speechRecognitionSupported === null) {
+        return null; // or a loading indicator
+    }
 
     if (!speechRecognitionSupported) {
-        return <span>Browser does not support speech recognition.</span>
+        return <span>Browser does not support speech recognition.</span>;
     }
 
     const listenContinuously = () => {
@@ -56,8 +43,7 @@ const IndexPage = () => {
             <button onClick={resetTranscript}>Reset</button>
             <p>{transcript}</p>
         </div>
-    )
-}
-export default IndexPage
+    );
+};
 
-
+export default Speech;
